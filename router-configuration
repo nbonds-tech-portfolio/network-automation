@@ -1,0 +1,23 @@
+
+from netmiko import ConnectHandler
+
+y = ["1.1.1.1", "2.2.2.2", "3.3.3.3"]
+b = ["f0/0", "f0/1", "f1/0"]
+
+print("\n\n----------------------------------------------------------------------")
+print(" Adding/Modifying Router Descriptions Using Netmiko and Basic Python ")
+print("----------------------------------------------------------------------")
+for j in y:
+        device = {"device_type": "cisco_ios","host": j,"username": "myUsername","password": "myPassword", "secret":"mySecret"}
+        connection = ConnectHandler(**device)
+        for a in b:
+                config_commands = ["interface "+str(a), "description Topology Used for the Network Automation Project",">
+                connection.enable()
+                connection.config_mode()
+                output = connection.send_config_set(config_commands)
+                print("-----> Router "+j)
+                print("\n\n"+output)
+        output2= connection.send_command('show interfaces description')
+        print("\n"+output2)
+        print("*************************************************************")
+        connection.disconnect()
