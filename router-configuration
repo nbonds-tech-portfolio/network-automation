@@ -1,6 +1,8 @@
 
 from netmiko import ConnectHandler
 
+#Add Descriptions to each interface of routers
+
 y = ["1.1.1.1", "2.2.2.2", "3.3.3.3"]
 b = ["f0/0", "f0/1", "f1/0"]
 
