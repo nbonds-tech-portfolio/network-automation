@@ -1,0 +1,10 @@
+from netmiko import ConnectHandler
+
+y=["192.168.56.1","192.168.56.34","192.168.56.66"]
+for x in y:
+        print("\n\n*** Show Version of Device with IP Address:  "+str(x)+"***")
+        device = { "device_type": "cisco_ios", "host": x, "username": "myUsername", "password": "myPassword",}
+        connection = ConnectHandler(**device)
+        output = connection.send_command("show version")
+        print(output)
+        connection.disconnect()
